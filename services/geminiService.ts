@@ -21,8 +21,11 @@ Keep responses short (under 50 words) to encourage conversation.
 let client: GoogleGenAI | null = null;
 
 const getClient = () => {
-  if (!client && process.env.API_KEY) {
-    client = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Use process.env.API_KEY as per guidelines
+  const apiKey = process.env.API_KEY;
+  
+  if (!client && apiKey) {
+    client = new GoogleGenAI({ apiKey: apiKey });
   }
   return client;
 };
@@ -64,7 +67,7 @@ export const sendMessageToGemini = async (message: string, history: {role: strin
 
   try {
     const chat = ai.chats.create({
-      model: "gemini-2.5-flash",
+      model: "gemini-3-flash-preview",
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
       },

@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { NeuButton, NeuCard } from './components/NeumorphicElements';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { ChatBot } from './components/ChatBot';
 import { ServiceCategory, PortfolioItem, Testimonial } from './types';
 
 function App() {
@@ -392,6 +393,7 @@ function App() {
       </footer>
 
       <FloatingWhatsApp />
+      <ChatBot />
     </div>
   );
 }
