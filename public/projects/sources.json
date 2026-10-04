@@ -1,0 +1,42 @@
+{
+  "body-logo": "https://acdn-us.mitiendanube.com/stores/007/494/978/themes/common/logo-2646956274665699499-1775928410-3a09c822ac40208b202dd513411700021775928410-480-0.webp",
+  "body-gomex": "https://acdn-us.mitiendanube.com/stores/007/494/978/products/render-gomex-creatina-mascara-4-1-d6d8749544a5ba060417821643573524-640-0.webp",
+  "body-whey": "https://acdn-us.mitiendanube.com/stores/007/494/978/products/whey-pr-frutilla-86270cfd7c1006d09e17756793361904-640-0.webp",
+  "body-creatina": "https://acdn-us.mitiendanube.com/stores/007/494/978/products/crea-5-209daa49d2270be28b17764507352473-640-0.webp",
+  "locos-logo": "https://lh3.googleusercontent.com/d/1rzR7t2SKi7HjVRlFbCs8_13Vw5u1bnqv",
+  "tiendita-logo": "https://scontent-den2-1.cdninstagram.com/v/t51.2885-19/445361280_1275800640061748_2926646770448091356_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4zNzAuQzMifQ%3D%3D&_nc_ohc=ArEYOTVw2o4Q7kNvwE39IKi&_nc_oc=AdqTr0DeZz3TTJTdWEPnn3BbqeI-ndkJ6iK-rLEO5-jZHavM29Vwt_mZE9RuEx2m4YUw6G1ZRgT2SyyxrvscWoe_&_nc_zt=24&_nc_ht=scontent-den2-1.cdninstagram.com&_nc_ss=7960f&oh=00_AQMOCcAExx3FTokUN2U-VdAgleSqxCCRhGrw1qpdvKU1Ag&oe=6AC78D20",
+  "locos-iphone": "https://lh3.googleusercontent.com/d/1ay9n5cpGckCKkar5WSWZfZ98UZXQ0X4n",
+  "body-screen": {
+    "source": "https://bodysupply.com.ar",
+    "capture_service": "Microlink",
+    "captured": "2026-10-04",
+    "viewport": "1280x800"
+  },
+  "locos-screen": {
+    "source": "https://locosxlatecnologia.com.ar",
+    "capture_service": "Microlink",
+    "captured": "2026-10-04",
+    "viewport": "1280x800"
+  },
+  "perkins-screen": {
+    "source": "https://mrperkins.shop",
+    "capture_service": "Microlink",
+    "captured": "2026-10-04",
+    "viewport": "1280x800"
+  },
+  "tiendita-screen": {
+    "source": "https://www.instagram.com/latiendita_tech/",
+    "status": "not included: public capture redirected to login"
+  },
+  "perkins-logo": "https://mrperkins.shop/MRP%20logo.png",
+  "social-views": {
+    "kind": "Brand identity previews, not Instagram screenshots",
+    "assets": "Existing original brand logos"
+  },
+  "tiendita-wall": {
+    "kind": "AI-generated illustrative Instagram wall",
+    "brand_reference": "original La Tiendita Tech logo",
+    "created": "2026-10-04",
+    "tool": "built-in image generation"
+  }
+}

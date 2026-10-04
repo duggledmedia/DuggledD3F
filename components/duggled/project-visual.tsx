@@ -1,0 +1,11 @@
+import {Heart,MessageCircle,Send,Bookmark} from 'lucide-react';
+import {projects} from '@/lib/content';
+type Project=(typeof projects)[number];
+export default function ProjectVisual({project:p}:{project:Project}){
+ const capture=p.capture||'/projects/tiendita-wall-card.webp';const mobile=capture.replace('-card.webp','-mobile.webp');
+ return <div className={`case-composition case-composition-${p.theme}`} role="img" aria-label={`${p.name}: ${p.capture?'sitio web, ':''}logo y vista de identidad para redes sociales`}>
+ <img className="case-banner-background" src={capture} srcSet={`${mobile} 640w, ${capture} 1280w`} sizes="(max-width:699px) 100vw, (max-width:1300px) 90vw, 1120px" alt="" width="1536" height="1024" loading="lazy" decoding="async"/>
+ {p.capture?<div className="case-web"><div className="case-web-chrome" aria-hidden="true"><span className="mac-lights"><i/><i/><i/></span><span>Web</span></div><img src={p.capture} srcSet={`${mobile} 640w, ${capture} 1280w`} sizes="(max-width:699px) 50vw, 540px" alt="" width="1280" height="800" loading="lazy" decoding="async"/></div>:<div className="case-brand-surface" aria-hidden="true"><img src={p.logo} alt="" width="370" height="370" loading="lazy" decoding="async"/><span>LA TIENDITA TECH</span></div>}
+ <div className="case-social" aria-hidden="true"><div className="case-web-chrome case-social-chrome"><span className="mac-lights"><i/><i/><i/></span><span>Redes</span></div><div className="case-social-top"><img src={p.logo} alt="" width="24" height="24" loading="lazy" decoding="async"/><span>{p.theme==='tiendita'?'latiendita_tech':p.theme==='body'?'Body Supply':p.theme==='locos'?'Locos x la Tecnología':'Mr. Perkins'}</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></div><div className="case-social-art"><img src={p.logo} alt="" width="160" height="160" loading="lazy" decoding="async"/><span>{p.theme==='perkins'?'SOMMELIER DE FRAGANCIAS':p.theme==='body'?'BODY SUPPLY':p.theme==='locos'?'LOCOS X LA TECNOLOGÍA':'LA TIENDITA TECH'}</span></div><div className="case-social-bottom"><Heart size={12}/><MessageCircle size={12}/><Send size={12}/><Bookmark size={12}/></div></div>
+ </div>;
+}
