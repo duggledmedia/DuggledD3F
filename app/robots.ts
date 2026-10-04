@@ -1,2 +1,3 @@
 import type {MetadataRoute} from 'next';
-export default function robots():MetadataRoute.Robots{return {rules:{userAgent:'*',allow:'/'},sitemap:'https://duggled-digital-studio.duggledmedia.chatgpt.site/sitemap.xml'}}
+import {siteOrigin} from '@/lib/site-url';
+export default function robots():MetadataRoute.Robots{return {rules:{userAgent:'*',allow:'/'},sitemap:siteOrigin+'/sitemap.xml'}}

@@ -1,2 +1,3 @@
 import type {MetadataRoute} from 'next';
-export default function sitemap():MetadataRoute.Sitemap{return [{url:'https://duggled-digital-studio.duggledmedia.chatgpt.site',lastModified:new Date(),changeFrequency:'monthly',priority:1}]}
+import {siteOrigin} from '@/lib/site-url';
+export default function sitemap():MetadataRoute.Sitemap{return [{url:siteOrigin,lastModified:new Date(),changeFrequency:'monthly',priority:1}]}
