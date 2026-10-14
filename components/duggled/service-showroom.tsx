@@ -5,6 +5,7 @@ import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, Plus } from 'luc
 import { contact } from '@/lib/content';
 import { serviceCatalog } from '@/lib/service-catalog';
 import styles from './service-showroom.module.css';
+import ShareService from './share-service';
 
 const number = (index: number) => String(index + 1).padStart(2, '0');
 
@@ -121,7 +122,7 @@ export default function ServiceShowroom() {
                     <div className={styles.deadline}><span className={styles.metaLabel}>{service.setup ? 'PUESTA EN MARCHA' : 'ENTREGA ESTIMADA'}</span><strong>{service.deadline}</strong><span className={styles.unit}>{service.setup ? '+ gestión continua' : 'implementación por única vez'}</span></div>
                   </div>
                   {service.setup && <p className={styles.setup}>Configuración inicial: <strong>USD {service.setup}</strong> por única vez.</p>}
-                  <a className={styles.cta} href={inquiry(service.label)} target="_blank" rel="noopener noreferrer">Quiero esta solución <ArrowUpRight size={21} aria-hidden="true" /></a>
+                  <div className={styles.actions}><a className={styles.cta} href={inquiry(service.label)} target="_blank" rel="noopener noreferrer">Quiero esta solución <ArrowUpRight size={21} aria-hidden="true" /></a><ShareService className={styles.shareButton} slug={service.id} label={service.label} /></div>
                   <details className={styles.scope}>
                     <summary>Qué incluye y qué cotizamos aparte <Plus size={19} aria-hidden="true" /></summary>
                     <ul>{service.includes.map(item => <li key={item}><Check size={15} aria-hidden="true" /><span>{item}</span></li>)}</ul>
@@ -153,7 +154,7 @@ export default function ServiceShowroom() {
                   <div className={styles.deadline}><span className={styles.metaLabel}>{service.setup ? 'PUESTA EN MARCHA' : 'ENTREGA ESTIMADA'}</span><strong>{service.deadline}</strong><span className={styles.unit}>{service.setup ? '+ gestión continua' : 'implementación por única vez'}</span></div>
                 </div>
                 {service.setup && <p className={styles.setup}>Configuración inicial: <strong>USD {service.setup}</strong> por única vez.</p>}
-                <a className={styles.cta} href={inquiry(service.label)} target="_blank" rel="noopener noreferrer">Quiero esta solución <ArrowUpRight size={21} aria-hidden="true" /></a>
+                <div className={styles.actions}><a className={styles.cta} href={inquiry(service.label)} target="_blank" rel="noopener noreferrer">Quiero esta solución <ArrowUpRight size={21} aria-hidden="true" /></a><ShareService className={styles.shareButton} slug={service.id} label={service.label} /></div>
               </div>
             </article>
           ))}
