@@ -2,6 +2,7 @@
 
 import { Check, Share2 } from 'lucide-react';
 import { useState } from 'react';
+import { siteOrigin } from '@/lib/site-url';
 
 type Props = { slug: string; label: string; className?: string };
 
@@ -9,7 +10,8 @@ export default function ShareService({ slug, label, className }: Props) {
   const [copied, setCopied] = useState(false);
 
   async function share() {
-    const url = `${window.location.origin}/servicios/${slug}`;
+    // A fresh share URL avoids reusing previews cached before the image fix.
+    const url = `${siteOrigin}/servicios/${slug}?share=2`;
     try {
       if (navigator.share) {
         await navigator.share({ title: `${label} | Duggled`, text: `${label}, una solución de Duggled para hacer avanzar tu negocio.`, url });

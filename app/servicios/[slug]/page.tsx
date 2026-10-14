@@ -19,13 +19,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = serviceCatalog.find(item => item.id === slug);
   if (!service) return {};
   const url = `${siteOrigin}/servicios/${service.id}`;
-  const image = `${url}/opengraph-image`;
+  const image = `${siteOrigin}/services-og/${service.id}.jpg`;
   const title = `${service.label} desde USD ${service.price} | Duggled`;
   return {
     title,
     description: service.description,
     alternates: { canonical: url },
-    openGraph: { type: 'website', locale: 'es_AR', siteName: 'Duggled', url, title, description: service.description, images: [{ url: image, width: 1200, height: 630, alt: `${service.label} — Duggled` }] },
+    openGraph: { type: 'website', locale: 'es_AR', siteName: 'Duggled', url, title, description: service.description, images: [{ url: image, width: 394, height: 700, type: 'image/jpeg', alt: `${service.label} — Duggled` }] },
     twitter: { card: 'summary_large_image', title, description: service.description, images: [image] },
   };
 }
