@@ -81,3 +81,9 @@
 .work-banners .case-composition-perkins .case-social{top:8%}
 @media(max-width:699px){.section-timeline{bottom:20px}.work-banners .case-composition-perkins .case-social{top:5%}}
 @supports not (backdrop-filter:url(#header-lens)){.header.contact-glass,.cinema-cta{backdrop-filter:blur(2px) saturate(190%);-webkit-backdrop-filter:blur(2px) saturate(190%)}}
+
+/* Keep the fixed studio signature readable over the dark service showroom. */
+body:has(.timeline-stop[href="#servicios"][aria-current="location"]) .fixed-studio-caption{color:#f5f3ed;text-shadow:none}
+body:has(.timeline-stop[href="#servicios"][aria-current="location"]) .header.contact-glass .header-cta{color:#f5f3ed}
+body:has(.timeline-stop[href="#servicios"][aria-current="location"]) .section-timeline:before{background:#ffffff40}
+@media(max-width:760px){body:has(.timeline-stop[href="#servicios"][aria-current="location"]) .section-timeline{visibility:hidden;pointer-events:none}}
