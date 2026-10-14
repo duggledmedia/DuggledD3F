@@ -12,7 +12,9 @@ export default function ServiceShowroom() {
   const [active, setActive] = useState(0);
   const root = useRef<HTMLElement>(null);
   const rail = useRef<HTMLDivElement>(null);
+  const mobileRail = useRef<HTMLDivElement>(null);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const mobileCards = useRef<(HTMLElement | null)[]>([]);
   const current = serviceCatalog[active];
 
   useEffect(() => {
@@ -40,6 +42,28 @@ export default function ServiceShowroom() {
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
       });
     }
+    const card = mobileCards.current[next];
+    const mobileContainer = mobileRail.current;
+    if (card && mobileContainer && mobileContainer.scrollWidth > mobileContainer.clientWidth) {
+      mobileContainer.scrollTo({
+        left: card.offsetLeft - mobileContainer.offsetLeft - (mobileContainer.clientWidth - card.clientWidth) / 2,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      });
+    }
+  }
+
+  function syncMobileActive() {
+    const container = mobileRail.current;
+    if (!container) return;
+    const center = container.scrollLeft + container.clientWidth / 2;
+    let closest = 0;
+    let distance = Number.POSITIVE_INFINITY;
+    mobileCards.current.forEach((card, index) => {
+      if (!card) return;
+      const nextDistance = Math.abs(card.offsetLeft + card.clientWidth / 2 - center);
+      if (nextDistance < distance) { distance = nextDistance; closest = index; }
+    });
+    setActive(previous => previous === closest ? previous : closest);
   }
 
   function onTabKey(event: KeyboardEvent<HTMLButtonElement>, index: number) {
@@ -107,6 +131,35 @@ export default function ServiceShowroom() {
               </>}
             </article>
           ))}
+        </div>
+
+        <div className={styles.mobileCarousel} ref={mobileRail} onScroll={syncMobileActive} aria-label="Servicios de Duggled. Deslizá hacia los costados para recorrerlos.">
+          {serviceCatalog.map((service, index) => (
+            <article className={styles.mobileCard} key={`mobile-${service.id}`} ref={element => { mobileCards.current[index] = element; }} aria-label={`${number(index)} de 08: ${service.label}`}>
+              <div className={styles.visual}>
+                <div className={styles.visualTop}><span>{service.category}</span><span>{number(index)} / 08</span></div>
+                <div className={styles.art} data-service={service.id}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={service.image} width={941} height={1672} alt={service.imageAlt} loading="lazy" decoding="async" />
+                </div>
+                <div className={styles.visualBottom}><span className={styles.signal} aria-hidden="true" /><span>{service.label}</span><span>DESLIZÁ PARA VER MÁS</span></div>
+              </div>
+              <div className={styles.offer}>
+                <span className={styles.eyebrow}>{service.label}</span>
+                <h3>{service.title[0]}<br /><em>{service.title[1]}</em></h3>
+                <p className={styles.description}>{service.description}</p>
+                <div className={styles.commercial}>
+                  <div><span className={styles.metaLabel}>{service.setup ? 'HONORARIOS DESDE' : 'DESDE'}</span><p className={styles.price}><span>USD</span> {service.price}</p><span className={styles.unit}>{service.unit}</span></div>
+                  <div className={styles.deadline}><span className={styles.metaLabel}>{service.setup ? 'PUESTA EN MARCHA' : 'ENTREGA ESTIMADA'}</span><strong>{service.deadline}</strong><span className={styles.unit}>{service.setup ? '+ gestión continua' : 'implementación por única vez'}</span></div>
+                </div>
+                {service.setup && <p className={styles.setup}>Configuración inicial: <strong>USD {service.setup}</strong> por única vez.</p>}
+                <a className={styles.cta} href={inquiry(service.label)} target="_blank" rel="noopener noreferrer">Quiero esta solución <ArrowUpRight size={21} aria-hidden="true" /></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className={styles.mobileDots} aria-label="Elegir servicio">
+          {serviceCatalog.map((service, index) => <button key={service.id} type="button" aria-label={`Ver ${service.label}`} aria-current={active === index ? 'true' : undefined} onClick={() => choose(index)} />)}
         </div>
 
         <div className={styles.pager}>

@@ -28,6 +28,7 @@ export function startNarrative(root: HTMLElement, onLoad: (progress: number, rea
 
   mm.add('(prefers-reduced-motion: no-preference)', () => {
     let active = true;
+    const mobile = window.matchMedia('(max-width: 699px)').matches;
     const q = gsap.utils.selector(root);
     const driver = { progress: 0 };
     let updateWorld: ((progress: number) => void) | undefined;
@@ -41,8 +42,10 @@ export function startNarrative(root: HTMLElement, onLoad: (progress: number, rea
     gsap.set(chapters, { y: 38, autoAlpha: 0 });
     const choreography = gsap.timeline({ paused: true });
     choreography.to({ clock: 0 }, { clock: 1, duration: 1, ease: 'none' }, 0);
-    choreography.fromTo(q('.intro-brand'), { y: 0, autoAlpha: 1 }, { y: -35, autoAlpha: 0, duration: .042, ease: 'none' }, 0);
-    const segments = [[.035, .065, .11, .15], [.16, .20, .30, .35], [.36, .40, .50, .55], [.56, .60, .70, .75], [.79, .85, 1, 1]];
+    choreography.fromTo(q('.intro-brand'), { y: 0, autoAlpha: 1 }, { y: -35, autoAlpha: 0, duration: mobile ? .08 : .042, ease: 'none' }, mobile ? .04 : 0);
+    const segments = mobile
+      ? [[.10, .16, .25, .29], [.29, .34, .43, .47], [.47, .52, .61, .65], [.65, .70, .79, .83], [.83, .88, 1, 1]]
+      : [[.035, .065, .11, .15], [.16, .20, .30, .35], [.36, .40, .50, .55], [.56, .60, .70, .75], [.79, .85, 1, 1]];
     segments.forEach(([start, arrive, hold, end], index) => {
       const chapter = chapters[index];
       choreography.fromTo(chapter, { y: 38, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: arrive - start, ease: 'none', immediateRender: false }, start);
@@ -55,19 +58,46 @@ export function startNarrative(root: HTMLElement, onLoad: (progress: number, rea
       choreography.progress(currentProgress);
       updateWorld?.(currentProgress);
       root.style.setProperty('--story-progress', currentProgress.toFixed(4));
-      const step = currentProgress < .15 ? 0 : currentProgress < .35 ? 1 : currentProgress < .55 ? 2 : currentProgress < .75 ? 3 : 4;
-      chapters.forEach((chapter, index) => { chapter.inert = index !== step || currentProgress < .035; });
+      const step = mobile
+        ? currentProgress < .28 ? 0 : currentProgress < .46 ? 1 : currentProgress < .64 ? 2 : currentProgress < .82 ? 3 : 4
+        : currentProgress < .15 ? 0 : currentProgress < .35 ? 1 : currentProgress < .55 ? 2 : currentProgress < .75 ? 3 : 4;
+      const introThreshold = mobile ? .1 : .035;
+      chapters.forEach((chapter, index) => { chapter.inert = index !== step || currentProgress < introThreshold; });
       buttons.forEach((button, index) => {
         if (index === step) button.setAttribute('aria-current', 'step');
         else button.removeAttribute('aria-current');
       });
-      if (intro) intro.inert = currentProgress > .035;
-      if (cta) cta.inert = currentProgress < .92;
+      if (intro) intro.inert = currentProgress > introThreshold;
+      if (cta) cta.inert = currentProgress < (mobile ? .88 : .92);
       cue();
     };
+    const mobileStops = [0, .18, .36, .54, .72, .9];
+    let mobileSnapStep = 0;
     const timeline = gsap.fromTo(driver, { progress: 0 }, {
       progress: 1, duration: 1, ease: 'none', onUpdate: advance,
-      scrollTrigger: { trigger: root, start: 'top top', end: 'bottom bottom', scrub: .6, invalidateOnRefresh: true, onRefresh: () => { choreography.invalidate(); advance(); } },
+      scrollTrigger: {
+        trigger: root, start: 'top top', end: 'bottom bottom', scrub: mobile ? .22 : .6, invalidateOnRefresh: true,
+        onRefresh: self => {
+          choreography.invalidate();
+          if (mobile) mobileSnapStep = mobileStops.reduce((best, point, index) => Math.abs(point - self.progress) < Math.abs(mobileStops[best] - self.progress) ? index : best, 0);
+          advance();
+        },
+        ...(mobile ? {
+          snap: {
+            snapTo: (value: number, self?: ScrollTrigger) => {
+              const settled = mobileStops[mobileSnapStep];
+              if (Math.abs(value - settled) < .02) return settled;
+              const direction = self?.direction ?? (value < settled ? -1 : 1);
+              mobileSnapStep = Math.max(0, Math.min(mobileStops.length - 1, mobileSnapStep + (direction < 0 ? -1 : 1)));
+              return mobileStops[mobileSnapStep];
+            },
+            duration: { min: .16, max: .34 }, delay: .035, ease: 'power2.out', inertia: false,
+          },
+          onSnapComplete: self => {
+            mobileSnapStep = mobileStops.reduce((best, point, index) => Math.abs(point - self.progress) < Math.abs(mobileStops[best] - self.progress) ? index : best, 0);
+          },
+        } : {}),
+      },
     });
     import('./cinema-world').then(async ({ createCinemaWorld }) => {
       if (disposed || !active) return;

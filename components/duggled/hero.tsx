@@ -23,10 +23,12 @@ export default function Hero() {
     return startNarrative(root.current, (progress, ready) => setLoading({ progress, ready }));
   }, []);
 
-  function goToChapter(progress: number) {
+  function goToChapter(progress: number, index: number) {
     const section = root.current;
     if (!section) return;
-    window.scrollTo({ top: section.offsetTop + progress * (section.offsetHeight - window.innerHeight), behavior: 'smooth' });
+    const mobileStops = [.18, .36, .54, .72, .9];
+    const destination = window.matchMedia('(max-width: 699px)').matches ? mobileStops[index] : progress;
+    window.scrollTo({ top: section.offsetTop + destination * (section.offsetHeight - window.innerHeight), behavior: 'smooth' });
   }
 
   return (
@@ -54,7 +56,6 @@ export default function Hero() {
           </div>
           <p><span>DISEÑO</span><span>MARKETING</span><span>TECNOLOGÍA</span></p>
         </div>
-        <div className="hero-eyebrow"><span>ESTUDIO CREATIVO & DIGITAL</span><span className="edition">BUENOS AIRES / PARA EL MUNDO</span></div>
         <div className="intro-brand">
           <span className="intro-kicker">UNA IDEA ES SOLO EL COMIENZO.</span>
           <div className="intro-word" aria-label="Duggled"><span className="intro-d" aria-hidden="true">D</span><span className="intro-letters">uggled<span className="intro-period">.</span></span></div>
@@ -72,7 +73,7 @@ export default function Hero() {
         <div className="cinema-scroll-cue" aria-hidden="true"><span>SCROLL PARA CONECTAR</span><svg viewBox="0 0 32 44" fill="none"><path d="M5 9L16 20L27 9M5 23L16 34L27 23" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg></div>
         <nav className="hero-story-nav" aria-label="Etapas de la experiencia">
           <div className="hero-story-track" aria-hidden="true"><span /></div>
-          {story.map((chapter, index) => <button key={chapter.label} type="button" data-story-step={index} onClick={() => goToChapter(chapter.progress)}><span>0{index + 1}</span><span>{chapter.label}</span></button>)}
+          {story.map((chapter, index) => <button key={chapter.label} type="button" data-story-step={index} onClick={() => goToChapter(chapter.progress, index)}><span>0{index + 1}</span><span>{chapter.label}</span></button>)}
           <a href="#servicios" aria-label="Ir a las soluciones de Duggled"><ArrowDown size={18} aria-hidden="true" /></a>
         </nav>
       </div>
