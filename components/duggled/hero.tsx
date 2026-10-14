@@ -43,7 +43,17 @@ export default function Hero() {
         <div className="intro-curtain" aria-hidden="true" />
         <div className="cinema-world" aria-hidden="true" />
         <div className="hero-atmosphere" aria-hidden="true" />
-        <div className="cinema-fallback" aria-hidden="true"><span className="brand-mark" /><span>DISEÑO</span><span>MARKETING</span><span>CONEXIONES</span></div>
+        <div className="cinema-fallback" aria-hidden="true">
+          <div className="fallback-orbit">
+            <span className="fallback-ring fallback-ring-a" />
+            <span className="fallback-ring fallback-ring-b" />
+            <span className="fallback-mark" />
+            <i className="fallback-node fallback-node-a" />
+            <i className="fallback-node fallback-node-b" />
+            <i className="fallback-node fallback-node-c" />
+          </div>
+          <p><span>DISEÑO</span><span>MARKETING</span><span>TECNOLOGÍA</span></p>
+        </div>
         <div className="hero-eyebrow"><span>ESTUDIO CREATIVO & DIGITAL</span><span className="edition">BUENOS AIRES / PARA EL MUNDO</span></div>
         <div className="intro-brand">
           <span className="intro-kicker">UNA IDEA ES SOLO EL COMIENZO.</span>
