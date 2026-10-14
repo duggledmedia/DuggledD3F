@@ -54,11 +54,11 @@ export default function Hero() {
           </div>
           <p><span>DISEÑO</span><span>MARKETING</span><span>TECNOLOGÍA</span></p>
         </div>
-        <div className="hero-eyebrow"><span>ESTUDIO CREATIVO & DIGITAL</span><span className="edition">BUENOS AIRES / PARA EL MUNDO</span></div>
+        
         <div className="intro-brand">
-          <span className="intro-kicker">UNA IDEA ES SOLO EL COMIENZO.</span>
+          <span className="intro-kicker">DEL CAOS AL ORDEN.</span>
           <div className="intro-word" aria-label="Duggled"><span className="intro-d" aria-hidden="true">D</span><span className="intro-letters">uggled<span className="intro-period">.</span></span></div>
-          <p className="intro-manifesto">Diseño que te distingue.<br />Conexiones que hacen avanzar tu negocio.</p>
+          <p className="intro-manifesto">Diseñamos experiencias digitales que se sienten distintas.<br />Y sistemas que hacen crecer negocios.</p>
           <a className="intro-explore" href="#servicios">Explorá nuestras soluciones <ArrowUpRight size={18} aria-hidden="true" /></a>
         </div>
         <div className="cinema-copy">{story.map((chapter, index) => (
