@@ -84,7 +84,7 @@ export default function ServiceShowroom() {
   return (
     <section id="servicios" className={styles.showroom} ref={root} aria-labelledby="services-title">
       <div className={styles.inner}>
-        <div className={styles.topline}><span>02 / SOLUCIONES DUGGLED</span><span>DISEÑO + TECNOLOGÍA + ESTRATEGIA</span></div>
+        <div className={styles.topline}><span>01 / SOLUCIONES DUGGLED</span><span>DISEÑO + TECNOLOGÍA + ESTRATEGIA</span></div>
         <div className={styles.intro}>
           <h2 id="services-title">Tu próximo paso.<br /><em>Bien conectado.</em></h2>
           <div className={styles.introAside}><p>Ocho formas de hacer avanzar tu negocio.<br />Encontrá la que necesitás hoy.</p><span><ArrowDown size={16} aria-hidden="true" /> EXPLORÁ LAS SOLUCIONES</span></div>
