@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import Link from 'next/link';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, Plus } from 'lucide-react';
 import { contact } from '@/lib/content';
 import { serviceCatalog } from '@/lib/service-catalog';
@@ -105,11 +106,11 @@ export default function ServiceShowroom() {
               {active === index && <>
                 <div className={styles.visual}>
                   <div className={styles.visualTop}><span>{service.category}</span><span>{number(index)} / 08</span></div>
-                  <div className={styles.art} data-service={service.id}>
+                  <Link className={styles.art} data-service={service.id} href={`/servicios/${service.id}`} aria-label={`Ver detalles de ${service.label}`} title={`Ver ${service.label}`}>
                     {/* The central illustration from the approved carousel, with all offer text rendered as accessible HTML below. */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={service.image} width={941} height={1672} alt={service.imageAlt} loading="lazy" decoding="async" />
-                  </div>
+                  </Link>
                   <div className={styles.visualBottom}><span className={styles.signal} aria-hidden="true" /><span>{service.label}</span><span>DISEÑADO PARA TU NEGOCIO</span></div>
                 </div>
 
@@ -139,10 +140,10 @@ export default function ServiceShowroom() {
             <article className={styles.mobileCard} key={`mobile-${service.id}`} ref={element => { mobileCards.current[index] = element; }} aria-label={`${number(index)} de 08: ${service.label}`}>
               <div className={styles.visual}>
                 <div className={styles.visualTop}><span>{service.category}</span><span>{number(index)} / 08</span></div>
-                <div className={styles.art} data-service={service.id}>
+                <Link className={styles.art} data-service={service.id} href={`/servicios/${service.id}`} aria-label={`Ver detalles de ${service.label}`} title={`Ver ${service.label}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={service.image} width={941} height={1672} alt={service.imageAlt} loading="lazy" decoding="async" />
-                </div>
+                </Link>
                 <div className={styles.visualBottom}><span className={styles.signal} aria-hidden="true" /><span>{service.label}</span><span>DESLIZÁ PARA VER MÁS</span></div>
               </div>
               <div className={styles.offer}>
