@@ -10,12 +10,12 @@ import ShareService from './share-service';
 
 const number = (index: number) => String(index + 1).padStart(2, '0');
 const homeFaqs = [
-  { category: 'SERVICIOS', question: '¿Qué servicios ofrecemos?', answer: 'Diseño web, tiendas online, gestión de Google Ads y Meta Ads, y automatizaciones con inteligencia artificial. Podés contratar cada solución por separado o combinarlas.', image: '/services/web-corporativa.webp' },
-  { category: 'INVERSIÓN', question: '¿Cuánto cuesta un proyecto?', answer: 'Las landing pages comienzan en USD 390 y las webs corporativas en USD 890. El presupuesto final depende del alcance. Además, todas las semanas tenemos ofertas y promociones con descuentos especiales: consultanos por las oportunidades disponibles.', image: '/services/landing-qr.webp' },
-  { category: 'ALCANCE', question: '¿Trabajan en toda Argentina?', answer: 'Sí. Trabajamos de forma remota desde Buenos Aires con empresas, profesionales y emprendedores de todo el país.', image: '/services/tienda-online.webp' },
-  { category: 'INTEGRACIÓN', question: '¿Podemos conectar todo?', answer: 'Sí. Podemos integrar sitios web, campañas publicitarias, formularios, WhatsApp y automatizaciones para que funcionen como un mismo sistema.', image: '/services/meta-ads.webp' },
-  { category: 'PLAZOS', question: '¿Cuánto tiempo lleva?', answer: 'Una landing suele llevar entre 5 y 7 días hábiles y una web corporativa entre 10 y 15. Los plazos comienzan luego de acordar el alcance y recibir el contenido necesario.', image: '/services/web-agenda.webp' },
-  { category: 'CONTACTO', question: '¿Cómo empezamos?', answer: 'Escribinos por WhatsApp, contanos sobre tu negocio y te ayudamos a definir el alcance y el presupuesto de tu proyecto.', image: '/services/google-ads.webp' },
+  { category: 'SERVICIOS', question: '¿Qué servicios ofrecemos?', answer: 'Diseño web, tiendas online, gestión de Google Ads y Meta Ads, y automatizaciones con inteligencia artificial. Podés contratar cada solución por separado o combinarlas.', image: '/faq/faq-servicios.webp' },
+  { category: 'INVERSIÓN', question: '¿Cuánto cuesta un proyecto?', answer: 'Las landing pages comienzan en USD 390 y las webs corporativas en USD 890. El presupuesto final depende del alcance. Además, todas las semanas tenemos ofertas y promociones con descuentos especiales: consultanos por las oportunidades disponibles.', image: '/faq/faq-inversion.webp' },
+  { category: 'ALCANCE', question: '¿Trabajan en toda Argentina?', answer: 'Sí. Trabajamos de forma remota desde Buenos Aires con empresas, profesionales y emprendedores de todo el país.', image: '/faq/faq-alcance.webp' },
+  { category: 'INTEGRACIÓN', question: '¿Podemos conectar todo?', answer: 'Sí. Podemos integrar sitios web, campañas publicitarias, formularios, WhatsApp y automatizaciones para que funcionen como un mismo sistema.', image: '/faq/faq-integracion.webp' },
+  { category: 'PLAZOS', question: '¿Cuánto tiempo lleva?', answer: 'Una landing suele llevar entre 5 y 7 días hábiles y una web corporativa entre 10 y 15. Los plazos comienzan luego de acordar el alcance y recibir el contenido necesario.', image: '/faq/faq-plazos.webp' },
+  { category: 'CONTACTO', question: '¿Cómo empezamos?', answer: 'Escribinos por WhatsApp, contanos sobre tu negocio y te ayudamos a definir el alcance y el presupuesto de tu proyecto.', image: '/faq/faq-contacto.webp' },
 ] as const;
 
 
