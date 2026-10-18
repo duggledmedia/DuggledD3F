@@ -25,10 +25,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${seo.keyword} | Duggled`;
   return {
     title,
-    description: `${service.description} Consultá con Duggled en Argentina.`,
+    description: `${seo.intro} Conocé el servicio de Duggled y pedí presupuesto.`,
     alternates: { canonical: url },
-    openGraph: { type: 'website', locale: 'es_AR', siteName: 'Duggled', url, title, description: service.description, images: [{ url: image, width: 394, height: 700, type: 'image/jpeg', alt: `${service.label} — Duggled` }] },
-    twitter: { card: 'summary_large_image', title, description: service.description, images: [image] },
+    openGraph: { type: 'website', locale: 'es_AR', siteName: 'Duggled', url, title, description: `${seo.intro} Consultá con Duggled.`, images: [{ url: image, width: 394, height: 700, type: 'image/jpeg', alt: `${service.label} — Duggled` }] },
+    twitter: { card: 'summary_large_image', title, description: `${seo.intro} Consultá con Duggled.`, images: [image] },
   };
 }
 
@@ -64,7 +64,7 @@ export default async function ServicePage({ params }: Props) {
         <p className={styles.seoLead}>{seo.intro}</p><p>{seo.audience}</p>
       </section>
       <section className={styles.seoSection}>
-        <span className={styles.seoKicker}>BENEFICIOS</span><h2>Todo lo necesario, sin vueltas.</h2>
+        <span className={styles.seoKicker}>BENEFICIOS</span><h2>Qué incluye nuestro servicio de {service.label.toLowerCase()}</h2>
         <div className={styles.seoGrid}>{seo.benefits.map((benefit,index)=><div key={benefit}><span>0{index+1}</span><h3>{benefit}</h3></div>)}</div>
       </section>
       <section className={styles.seoSection}>
@@ -72,7 +72,7 @@ export default async function ServicePage({ params }: Props) {
         <ol className={styles.seoSteps}>{seo.process.map((step,index)=><li key={step}><span>0{index+1}</span><p>{step}</p></li>)}</ol>
       </section>
       <section className={styles.seoSection}>
-        <span className={styles.seoKicker}>PREGUNTAS FRECUENTES</span><h2>Lo que conviene saber.</h2>
+        <span className={styles.seoKicker}>PREGUNTAS FRECUENTES</span><h2>Preguntas frecuentes sobre {service.label.toLowerCase()}</h2>
         <div className={styles.seoFaq}>{seo.faq.map(([question,answer])=><details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div>
       </section>
       <section className={styles.seoClosing}><div><span className={styles.seoKicker}>HABLEMOS DE TU PROYECTO</span><h2>¿Lo hacemos realidad?</h2><p>Contanos qué necesitás y te ayudamos a definir los próximos pasos.</p></div><a href={inquiry(service.label)} target="_blank" rel="noopener noreferrer">Consultar por WhatsApp <ArrowUpRight size={20} aria-hidden="true"/></a></section>
