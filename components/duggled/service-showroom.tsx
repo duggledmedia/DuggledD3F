@@ -9,6 +9,15 @@ import styles from './service-showroom.module.css';
 import ShareService from './share-service';
 
 const number = (index: number) => String(index + 1).padStart(2, '0');
+const homeFaqs = [
+  { category: 'SERVICIOS', question: '¿Qué servicios ofrecemos?', answer: 'Diseño web, tiendas online, gestión de Google Ads y Meta Ads, y automatizaciones con inteligencia artificial. Podés contratar cada solución por separado o combinarlas.', image: '/services/web-corporativa.webp' },
+  { category: 'INVERSIÓN', question: '¿Cuánto cuesta un proyecto?', answer: 'Las landing pages comienzan en USD 390 y las webs corporativas en USD 890. El presupuesto final depende del alcance. Además, todas las semanas tenemos ofertas y promociones con descuentos especiales: consultanos por las oportunidades disponibles.', image: '/services/landing-qr.webp' },
+  { category: 'ALCANCE', question: '¿Trabajan en toda Argentina?', answer: 'Sí. Trabajamos de forma remota desde Buenos Aires con empresas, profesionales y emprendedores de todo el país.', image: '/services/tienda-online.webp' },
+  { category: 'INTEGRACIÓN', question: '¿Podemos conectar todo?', answer: 'Sí. Podemos integrar sitios web, campañas publicitarias, formularios, WhatsApp y automatizaciones para que funcionen como un mismo sistema.', image: '/services/meta-ads.webp' },
+  { category: 'PLAZOS', question: '¿Cuánto tiempo lleva?', answer: 'Una landing suele llevar entre 5 y 7 días hábiles y una web corporativa entre 10 y 15. Los plazos comienzan luego de acordar el alcance y recibir el contenido necesario.', image: '/services/web-agenda.webp' },
+  { category: 'CONTACTO', question: '¿Cómo empezamos?', answer: 'Escribinos por WhatsApp, contanos sobre tu negocio y te ayudamos a definir el alcance y el presupuesto de tu proyecto.', image: '/services/google-ads.webp' },
+] as const;
+
 
 export default function ServiceShowroom() {
   const [active, setActive] = useState(0);
@@ -174,6 +183,21 @@ export default function ServiceShowroom() {
           <div><span className={styles.eyebrow}>CADA NEGOCIO ES UN MUNDO</span><h3>¿Necesitás conectar<br /><em>varias piezas?</em></h3><p>También hacemos branding, automatizaciones y proyectos a medida. Armemos la combinación que tenga sentido para vos.</p></div>
           <a href={contact} target="_blank" rel="noopener noreferrer">Pensemos tu proyecto <ArrowUpRight size={24} aria-hidden="true" /></a>
         </div>
+        <section className={styles.faqSection} aria-labelledby="home-faq-title">
+          <div className={styles.faqHeading}><span className={styles.eyebrow}>PREGUNTAS FRECUENTES / DUGGLED</span><h3 id="home-faq-title">Respuestas. <em>Sin vueltas.</em></h3></div>
+          <div className={styles.faqGrid}>
+            {homeFaqs.map((faq, index) => <details className={styles.faqCard} key={faq.question}>
+              <summary className={styles.faqSummary}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className={styles.faqImage} src={faq.image} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+                <span className={styles.faqOverlay} aria-hidden="true" />
+                <span className={styles.faqContent}><span className={styles.faqTop}><span>{number(index)} / {faq.category}</span><Plus size={17} aria-hidden="true" /></span><span className={styles.faqQuestion}>{faq.question}</span></span>
+              </summary>
+              <div className={styles.faqAnswer}><p>{faq.answer}</p></div>
+            </details>)}
+          </div>
+          <div className={styles.faqFooter}><span>¿Te quedó alguna duda?</span><a href={contact} target="_blank" rel="noopener noreferrer">Hablemos <ArrowUpRight size={18} aria-hidden="true" /></a></div>
+        </section>
         <p className={styles.conditions}>Precios base en USD según el alcance indicado. Presupuesto final a confirmar. Los plazos comienzan con la aprobación del alcance y la entrega de contenidos y accesos; las aprobaciones de terceros pueden extenderlos. Mantenimiento y costos externos se cotizan aparte. Las imágenes son ilustrativas.</p>
       </div>
     </section>
