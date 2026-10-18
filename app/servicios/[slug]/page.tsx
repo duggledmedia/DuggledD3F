@@ -20,10 +20,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return {};
   const url = `${siteOrigin}/servicios/${service.id}`;
   const image = `${siteOrigin}/services-og/${service.id}.jpg`;
-  const title = `${service.label} desde USD ${service.price} | Duggled`;
+  const title = `${service.label} en Argentina | Duggled`;
   return {
     title,
-    description: service.description,
+    description: `${service.description} Consultá el alcance y presupuesto con Duggled, Argentina.`,
     alternates: { canonical: url },
     openGraph: { type: 'website', locale: 'es_AR', siteName: 'Duggled', url, title, description: service.description, images: [{ url: image, width: 394, height: 700, type: 'image/jpeg', alt: `${service.label} — Duggled` }] },
     twitter: { card: 'summary_large_image', title, description: service.description, images: [image] },
@@ -54,6 +54,7 @@ export default async function ServicePage({ params }: Props) {
         <div className={styles.includes}><span>QUÉ INCLUYE</span><ul>{service.includes.map(item => <li key={item}><Check size={16} aria-hidden="true"/><span>{item}</span></li>)}</ul><p>{service.exclusions}</p></div>
       </div>
     </section>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({'@context':'https://schema.org','@type':'Service',name:service.label,description:service.description,provider:{'@type':'ProfessionalService',name:'Duggled',url:siteOrigin},offers:{'@type':'Offer',price:service.price,priceCurrency:'USD',url:`${siteOrigin}/servicios/${service.id}`}})}} />
+    <nav aria-label="Otros servicios" className={styles.related}><p>Otras soluciones para hacer crecer tu negocio</p><Link href="/automatizaciones">Automatizaciones para empresas ↗</Link>{serviceCatalog.filter(item=>item.id!==service.id).slice(0,3).map(item=><Link key={item.id} href={`/servicios/${item.id}`}>{item.label} ↗</Link>)}</nav>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({'@context':'https://schema.org','@graph':[{'@type':'Service',name:service.label,description:service.description,provider:{'@type':'ProfessionalService',name:'Duggled',url:siteOrigin},areaServed:{'@type':'Country',name:'Argentina'},offers:{'@type':'Offer',price:service.price,priceCurrency:'USD',url:`${siteOrigin}/servicios/${service.id}`}}, {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Inicio',item:siteOrigin},{'@type':'ListItem',position:2,name:service.label,item:`${siteOrigin}/servicios/${service.id}` }]}]})}} />
   </main>;
 }
