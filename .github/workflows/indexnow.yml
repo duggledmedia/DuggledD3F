@@ -1,0 +1,76 @@
+name: Notify IndexNow of updated pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'components/duggled/**'
+      - 'lib/service-catalog.ts'
+      - 'lib/service-seo.ts'
+      - 'public/services/**'
+      - 'public/projects/**'
+      - 'public/**.txt'
+      - '.github/workflows/indexnow.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Check domain and key file are deployed
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 24); do
+            published="$(curl -fsS --max-time 12 "https://www.duggled.com.ar/79938bda9f560ef1549b95e5951166c7.txt" || true)"
+            if [ "$published" = "79938bda9f560ef1549b95e5951166c7" ]; then
+              echo "IndexNow key published"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "Key file not available on production; submission cancelled"
+          exit 1
+      - name: Notify IndexNow (only changed sections)
+        shell: bash
+        env:
+          INDEXNOW_KEY: 79938bda9f560ef1549b95e5951166c7
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess, urllib.request, urllib.error
+          root = 'https://www.duggled.com.ar'
+          changes = subprocess.run(['git','diff','--name-only','HEAD^','HEAD'],capture_output=True,text=True)
+          files = changes.stdout.splitlines() if changes.returncode == 0 else []
+          key_path = f'public/{os.environ["INDEXNOW_KEY"]}.txt'
+          # Ignore submissions for changes unrelated to site content.
+          global_change = any(p in ('app/layout.tsx','app/page.tsx','app/sitemap.ts','lib/service-catalog.ts','lib/service-seo.ts') or p.startswith('components/duggled/') for p in files)
+          urls = []
+          if global_change or '.github/workflows/indexnow.yml' in files or key_path in files:
+            urls = [root+'/',root+'/automatizaciones']
+            catalog = pathlib.Path('lib/service-catalog.ts').read_text()
+            import re
+            urls.extend(root+'/servicios/'+slug for slug in re.findall(r"id:\s*'([^']+)'",catalog))
+          else:
+            if any(p.startswith('app/automatizaciones/') for p in files): urls.append(root+'/automatizaciones')
+            if any(p.startswith('app/servicios/') or p.startswith('public/services/') for p in files):
+              catalog = pathlib.Path('lib/service-catalog.ts').read_text()
+              import re
+              urls.extend(root+'/servicios/'+slug for slug in re.findall(r"id:\s*'([^']+)'",catalog))
+            if any(p.startswith('app/page.tsx') or p.startswith('app/opengraph-image') for p in files): urls.append(root+'/')
+          urls=list(dict.fromkeys(urls))
+          if not urls:
+            print('No page updates to submit')
+            raise SystemExit(0)
+          payload=json.dumps({'host':'www.duggled.com.ar','key':os.environ['INDEXNOW_KEY'],'keyLocation':root+'/'+os.environ['INDEXNOW_KEY']+'.txt','urlList':urls}).encode()
+          request=urllib.request.Request('https://api.indexnow.org/indexnow',data=payload,headers={'Content-Type':'application/json; charset=utf-8'},method='POST')
+          try:
+            with urllib.request.urlopen(request,timeout=30) as resp:
+              print('IndexNow HTTP',resp.status,'URLs submitted:',len(urls))
+          except urllib.error.HTTPError as err:
+            print('IndexNow HTTP',err.code,err.read().decode(errors='replace'))
+            raise
+          PY
