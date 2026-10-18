@@ -1,7 +1,7 @@
 export type ServiceSeo = {keyword:string;intro:string;audience:string;benefits:string[];process:string[];faq:[string,string][]};
 export const serviceSeo:Record<string,ServiceSeo> = {
   "landing-qr": {
-    "keyword": "Diseño de landing pages con QR en Argentina",
+    "keyword": "Diseño de landing pages en Argentina",
     "intro": "Convertí una presentación breve en un punto de contacto claro. Una landing page combina mensaje, propuesta y acción para que una persona pueda conocerte desde un enlace o escaneando un QR.",
     "audience": "Ideal para emprendedores, profesionales, ferias y negocios que necesitan presentar una oferta sin desarrollar un sitio de muchas páginas.",
     "benefits": [
@@ -30,7 +30,7 @@ export const serviceSeo:Record<string,ServiceSeo> = {
     ]
   },
   "menu-qr": {
-    "keyword": "Menú digital con código QR para restaurantes",
+    "keyword": "Menú digital QR para restaurantes",
     "intro": "Hacé que tu carta esté disponible al instante desde cualquier celular. Un menú online ordena platos, descripciones y precios para que tus clientes encuentren lo que buscan sin descargar archivos.",
     "audience": "Pensado para restaurantes, cafeterías, bares y otros locales gastronómicos que necesitan actualizar sus opciones de manera práctica.",
     "benefits": [
@@ -59,7 +59,7 @@ export const serviceSeo:Record<string,ServiceSeo> = {
     ]
   },
   "web-agenda": {
-    "keyword": "Página web con turnos y reservas online en Argentina",
+    "keyword": "Sistema de turnos online y página web con reservas",
     "intro": "Tu cliente elige un horario disponible y confirma su turno sin coordinar cada detalle por mensajes. Combinamos una página profesional con una agenda digital para simplificar las reservas.",
     "audience": "Una solución especialmente útil para profesionales independientes, consultorios, servicios personalizados y negocios que trabajan con horarios.",
     "benefits": [
@@ -88,7 +88,7 @@ export const serviceSeo:Record<string,ServiceSeo> = {
     ]
   },
   "web-corporativa": {
-    "keyword": "Diseño web corporativo profesional en Argentina",
+    "keyword": "Diseño web profesional para empresas en Argentina",
     "intro": "Tu sitio institucional es un espacio propio para presentar qué hace tu empresa, generar confianza y facilitar consultas. Diseñamos experiencias responsive con una identidad clara y un recorrido pensado para el contacto.",
     "audience": "Ideal para pymes, empresas de servicios y marcas que necesitan explicar su propuesta profesionalmente y tener presencia online propia.",
     "benefits": [
@@ -117,7 +117,7 @@ export const serviceSeo:Record<string,ServiceSeo> = {
     ]
   },
   "tienda-online": {
-    "keyword": "Diseño de tiendas online y ecommerce en Argentina",
+    "keyword": "Diseño de tiendas online en Argentina",
     "intro": "Llevá tu catálogo a una experiencia de compra ordenada. Configuramos una tienda online sobre una plataforma existente, con fichas de producto, carrito, pagos y opciones de envío compatibles.",
     "audience": "Para comercios y emprendedores que quieren comenzar a vender online o renovar la presentación de su catálogo digital.",
     "benefits": [
@@ -146,7 +146,7 @@ export const serviceSeo:Record<string,ServiceSeo> = {
     ]
   },
   "mercado-libre": {
-    "keyword": "Optimización de publicaciones de Mercado Libre en Argentina",
+    "keyword": "Optimización de publicaciones en Mercado Libre",
     "intro": "Una publicación clara ayuda a que las personas entiendan qué están comprando. Revisamos títulos, atributos, descripciones e imágenes de tus productos para mejorar su presentación dentro de Mercado Libre.",
     "audience": "Para vendedores que ya publican productos y necesitan corregir información incompleta o mejorar la calidad de sus fichas.",
     "benefits": [
@@ -175,7 +175,7 @@ export const serviceSeo:Record<string,ServiceSeo> = {
     ]
   },
   "meta-ads": {
-    "keyword": "Gestión de publicidad en Facebook e Instagram Ads",
+    "keyword": "Gestión de Meta Ads: publicidad en Instagram y Facebook",
     "intro": "Mostrá tu marca frente a públicos relevantes mediante campañas en Facebook e Instagram. Planificamos anuncios, configuramos la cuenta y realizamos ajustes basados en resultados medibles.",
     "audience": "Para empresas y emprendedores que buscan generar consultas, presentar productos o aumentar el alcance de sus propuestas mediante pauta digital.",
     "benefits": [
@@ -204,7 +204,7 @@ export const serviceSeo:Record<string,ServiceSeo> = {
     ]
   },
   "google-ads": {
-    "keyword": "Gestión de campañas Google Ads en Argentina",
+    "keyword": "Gestión de Google Ads en Argentina",
     "intro": "Conectá tu oferta con personas que ya están buscando productos o servicios como los tuyos. Configuramos campañas de búsqueda con palabras clave, anuncios y seguimiento de conversiones básicas.",
     "audience": "Para negocios que necesitan captar demanda existente en Google y dirigir consultas hacia su web, landing page o canal comercial.",
     "benefits": [
