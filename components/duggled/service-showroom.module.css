@@ -85,3 +85,30 @@
 @media(max-width:760px){.tabs,.stage,.pager{display:none}.actions{grid-template-columns:1fr}.shareButton{min-height:48px}.mobileCarousel{display:flex;align-items:flex-start;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:22px;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -22px 12px;padding:2px 22px 20px}.mobileCarousel::-webkit-scrollbar{display:none}.mobileCard{flex:0 0 calc(100vw - 58px);max-width:460px;scroll-snap-align:center;scroll-snap-stop:always;overflow:hidden;border:1px solid #ffffff24;border-radius:12px;background:#151613;box-shadow:0 18px 45px #0005}.mobileCard .visual{border:0;border-bottom:1px solid #ffffff18}.mobileCard .art{width:100%;max-width:none;aspect-ratio:9/14;max-height:520px;align-self:auto;mask-image:none}.mobileCard .art img,.mobileCard .art[data-service=mercado-libre] img{inset:0;top:0;width:100%;height:100%;object-fit:cover;object-position:top;transform:none}.mobileCard .offer{padding-bottom:24px}.mobileCard .actions{margin-top:20px}.mobileCard .cta{margin-top:0}.mobileDots{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 34px}.mobileDots button{width:7px;height:7px;padding:0;border:1px solid #787c70;border-radius:50%;background:transparent;transition:width .25s,background .25s,border-color .25s}.mobileDots button[aria-current=true]{width:25px;border-radius:8px;border-color:var(--service-orange);background:var(--service-orange)}}
 @media(max-width:380px){.mobileCarousel{margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px;scroll-padding-inline:18px}.mobileCard{flex-basis:calc(100vw - 48px)}}
 @media(prefers-reduced-motion:reduce){.showroom *,.showroom[data-entered=true] .intro{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* Compact full-image FAQ cards: text and translucent overlay share the image surface. */
+.faqSection{padding:14px 0 44px;border-top:1px solid #ffffff22}
+.faqHeading{margin:16px 0 23px}
+.faqHeading h3{font-size:clamp(25px,2.4vw,36px);font-weight:500;letter-spacing:-.045em;line-height:1.12;margin-top:9px;color:#f6f4ef}
+.faqHeading h3 em{color:var(--service-orange)}
+.faqGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.faqCard{min-width:0;overflow:hidden;border-radius:9px;border:1px solid #ffffff28;background:#1c1d1a;transition:border-color .2s,box-shadow .2s}
+.faqCard:hover,.faqCard[open]{border-color:#ff844b91;box-shadow:0 8px 28px #0003}
+.faqSummary{cursor:pointer;display:block;list-style:none;position:relative;height:155px;overflow:hidden;isolation:isolate}
+.faqSummary::-webkit-details-marker{display:none}
+.faqImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 34%;filter:grayscale(.2) brightness(.75);opacity:.8;transition:transform .45s}
+.faqCard:hover .faqImage{transform:scale(1.045)}
+.faqOverlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,24,24,.42) 0%,rgba(25,26,26,.48) 38%,rgba(15,17,17,.78) 100%);z-index:1}
+.faqContent{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:17px 20px;color:#fff}
+.faqTop{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.1em;color:#ff995d}
+.faqTop svg{flex-shrink:0;transition:transform .25s}
+.faqCard[open] .faqTop svg{transform:rotate(45deg)}
+.faqQuestion{display:block;font-size:clamp(17px,1.7vw,24px);font-weight:500;letter-spacing:-.035em;line-height:1.2;text-shadow:0 2px 14px #0009;max-width:95%}
+.faqAnswer{padding:17px 20px 21px;background:#232420;border-top:1px solid #ffffff16}
+.faqAnswer p{margin:0;font-size:13px;line-height:1.7;color:#deddd5}
+.faqFooter{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:20px;font-size:12px;color:#aeb0a4}
+.faqFooter a{display:inline-flex;align-items:center;gap:8px;color:#f5f3ec;border-bottom:1px solid var(--service-orange);padding:8px 0}
+.faqFooter a svg{color:var(--service-orange)}
+@media(max-width:760px){.faqSection{padding-bottom:35px}.faqGrid{grid-template-columns:1fr;gap:10px}.faqSummary{height:135px}.faqQuestion{font-size:21px}.faqContent{padding:16px 18px}.faqAnswer{padding:15px 18px 18px}}
+@media(prefers-reduced-motion:reduce){.faqCard,.faqImage,.faqTop svg{transition:none!important}}
